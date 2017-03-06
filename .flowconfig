@@ -1,0 +1,7 @@
+[ignore]
+.*/node_modules/invariant/.*
+[include]
+[libs]
+[options]
+esproposal.decorators=ignore
+module.name_mapper='.*\(.css\)' -> 'empty/object'

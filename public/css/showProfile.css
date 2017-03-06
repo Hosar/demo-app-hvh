@@ -1,0 +1,6 @@
+.fixBox {	
+	borderWidth: 2;
+	borderColor: '#ffff00';
+	borderStyle: 'dashed';
+	borderRadius: 5;
+}
