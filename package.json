@@ -26,8 +26,7 @@
     "react-google-maps": "^6.0.1",
     "react-router": "^3.0.2",
     "react-select": "^1.0.0-rc.3",
-    "storybook-addon-specifications": "^1.0.15",
-    "strophe": "^1.2.4",
+    "storybook-addon-specifications": "^1.0.15",    
     "superagent": "^3.3.2",
     "uuid": "^2.0.3",
     "validate.js": "^0.11.1"
