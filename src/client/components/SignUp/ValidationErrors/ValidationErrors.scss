@@ -1,0 +1,41 @@
+$bg-color: rgba(0,0,0, 0.9);
+$break-large: 450px;
+$normal-font-size: 2.250em;
+$small-font: 1.250em;
+$sixtyPercent: 60%;
+$fiftyPercent: 50%;
+$errorColor: #800000;
+$normal-font: 'Lato', sans-serif;
+
+.overlay {
+    font-family: $normal-font;
+    height: 100%;    
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0; 
+    background-color: $bg-color;
+    overflow-x: hidden;
+    transition: 0.5s;
+    li{
+        font-size: $normal-font-size;
+        color:$errorColor;
+    }
+    a {    
+        text-decoration: none;
+        font-size: $normal-font-size;        
+        color: $errorColor;
+    }
+    
+    @media screen and (max-height: $break-large) {        
+        a {font-size: $small-font}  
+        li {font-size: $small-font}  
+    }   
+}
+
+.overlay-inner {
+  position: absolute;
+  top: $sixtyPercent;
+  left: $fiftyPercent;
+  transform: translate(-$fiftyPercent,-$sixtyPercent);
+}

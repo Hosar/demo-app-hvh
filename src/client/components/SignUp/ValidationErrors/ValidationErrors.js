@@ -1,18 +1,21 @@
 // @flow
 import React from 'react';
-import R from 'ramda';
+import './ValidationErrors.scss';
 
 const ValidationErrors = (props: { errors: Array<string>, hasErrorsStyle: Object, closeOverlay: () => void }) => {
     return (
         <div>
             <div className="overlay" style={props.hasErrorsStyle}>
-                <div className="text-center overlay-inner">                    
+                <div className="text-center overlay-inner">
                     <div className="text-center">
-                        {
-                            props.errors.map((err, index) =>{
-                                return <h2 key={index}>{err}</h2>;
-                            })
-                        }
+                        <ul>
+                            {
+                                props.errors.map((err, index) => {
+                                    return <li key={index}>{err}</li>;
+                                })
+                            }
+                        </ul>
+
                     </div>
                     <div className="text-center">
                         <a onClick={props.closeOverlay}>&times;</a>
@@ -25,8 +28,8 @@ const ValidationErrors = (props: { errors: Array<string>, hasErrorsStyle: Object
 
 ValidationErrors.propTypes = {
     errors: React.PropTypes.array.isRequired,
-    hasErrorsStyle: React.PropTypes.object.isRequired,    
-    closeOverlay: React.PropTypes.func.isRequired   
+    hasErrorsStyle: React.PropTypes.object.isRequired,
+    closeOverlay: React.PropTypes.func.isRequired
 };
 
 export default ValidationErrors;

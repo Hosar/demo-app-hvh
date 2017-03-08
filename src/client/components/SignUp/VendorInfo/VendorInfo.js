@@ -28,10 +28,14 @@ class VendorInfo extends Component {
     inputEmail: Object;
     inputPhone: Object;
     inputWebSite: Object;
+    objCountry = {
+        shortName:'n/s',
+        longName:'Please select...'
+    }
 
     constructor(props: Props){
         super(props);
-        this.state = { selectedCtry: {value:'US'} };
+        this.state = { selectedCtry: {value:this.objCountry.shortName} };
         this.selectCountry = this.selectCountry.bind(this);
     }
     
@@ -43,6 +47,17 @@ class VendorInfo extends Component {
         
         this.setState({ selectedCtry: coutry });
     }
+
+    componentDidMount() {
+        const store = this.props.vendorStore;
+        store.setVendorInfo({
+            country:this.objCountry
+        });
+    }
+    
+
+    
+    
 
     render() {        
         const store = this.props.vendorStore;
@@ -91,6 +106,7 @@ class VendorInfo extends Component {
 
 VendorInfo.defaultProps = {
     countries: [
+        { value: 'n/s', label: 'Please select...'},
         { value: 'MX', label: 'Mexico' },
         { value: 'US', label: 'United States' },
         { value: 'CA', label: 'Canada' }

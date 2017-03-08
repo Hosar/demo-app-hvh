@@ -10,7 +10,6 @@ import { specs, describe, it } from 'storybook-addon-specifications';
 import chai from 'chai';
 import chaiEnzyme from 'chai-enzyme';
 import '../../../../public/css/bootstrap.min.css';
-import '../../../../public/css/init.css';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -42,10 +41,11 @@ storiesOf('Vendor sign up', module)
 
         const cmp = <ValidationErrors errors={errors} hasErrorsStyle={hasErrorsStyle} closeOverlay={() => { }} />;
         specs(() => describe('Validation errors', () => {
-            const wrapper = mount(cmp);
             it('Should show a list of errors', () => {
-
+                const wrapper = mount(cmp);
                 const errMsgs = wrapper.find('h2');
+                console.log('errMsgs:');
+                console.log(errMsgs);
                 expect(errMsgs).to.have.length.of(3);
             });
         }));

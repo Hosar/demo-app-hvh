@@ -16,6 +16,13 @@ const validatePhone = function (value, options, key, attributes) {
     return null;
 };
 
+const validateCountry = function (value, options, key, attributes) {
+    if ((value.shortName === 'n/s') || (!value.shortName))
+        return '- Please select';
+
+    return null;
+};
+
 class VendorStore {
     constructor(httpHandler) {
         this.httpHandler = httpHandler;
@@ -31,7 +38,10 @@ class VendorStore {
     }
     @observable vendorInfo = {
         publicName: null,
-        country: {}
+        country: {},
+        email: null,
+        phone: null,
+        vendorLogo: []
     }
 
 
@@ -43,15 +53,12 @@ class VendorStore {
         };        
     }
 
-    @action setVendorLogo(files){        
-        this.vendorLogo.replace(files);
+    @action setVendorLogo(files){ 
+        this.vendorInfo.vendorLogo.replace(files);
     }
 
     @observable
-    validationErrors = [];
-
-    @observable
-    vendorLogo = [];
+    validationErrors = [];    
 
     @computed
     get hasErrorsStyle(){        
@@ -64,37 +71,30 @@ class VendorStore {
     @computed
     get hasErrors() {
         validate.validators.verifyPhone = validatePhone;
+        validate.validators.verifyCountry = validateCountry;
         const _hasErrors = validate(this.vendorInfo, constrains);
         return _hasErrors;
     }
 
     validateVendorInfo(){
-        validate.validators.verifyPhone = validatePhone;        
-        const errs = validate(this.vendorInfo, constrains);
-        if (!errs && this.hasVendorLogo()){
-            this.resetValidationErrors();
-            return;
-        }
+        validate.validators.verifyPhone = validatePhone;
+        validate.validators.verifyCountry = validateCountry;
+        const errs = validate(this.vendorInfo, constrains); 
         const _errs = !errs ? [] : errs;
         const errorDescription = 0;
         const errors = R.props(Object.keys(_errs))(_errs).map(_errs => _errs[errorDescription]);
-        if (this.vendorLogo.length <= 0)
-             errors.push('Please add a logo image');
 
         this.validationErrors.replace(errors);
         return this.validationErrors.peek();        
-    }
-
-    hasVendorLogo(){
-        return this.vendorLogo.length > 0 ? true : false;
-    }
+    }    
 
     resetValidationErrors(){
         this.validationErrors.replace([]);
     }   
 
     submitInfo(){
-        const file = this.vendorLogo[0];
+        const file = this.vendorInfo.vendorLogo[0];
+        delete this.vendorInfo.vendorLogo;
         return this.httpHandler.post(constants.saveVendor)
                                .field('vendorInfo', JSON.stringify(this.vendorInfo))
 						       .attach('vendorLogo',file);

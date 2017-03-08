@@ -7,6 +7,7 @@ import { getCurrentPosition } from '../../common/utils';
 import ValidationErrors from './ValidationErrors';
 import VendorInfo from './VendorInfo';
 import 'react-select/dist/react-select.css';
+import './SignUpForm.scss';
 
 type Props = {
     vendorStore: Object
@@ -50,6 +51,7 @@ class SignUpForm extends Component {
 
 
     submit() {
+        console.log('Inside submit');
         const hasErrors = this.props.vendorStore.validateVendorInfo();
         if (hasErrors)
             return;
@@ -91,12 +93,17 @@ class SignUpForm extends Component {
                                     <div>
                                         <Dropzone onDrop={this.onDrop} name={this.state.inputName}
                                             accept="image/png,image/jpeg,image/gif" maxSize={5000000}
-                                            style={{ borderColor: '#ffff00', borderWidth: 2, borderStyle: 'dashed', borderRadius: 5, height: 300 }}>
-                                            <div className="pointer">Try dropping some files here, or click to select files to upload.</div>
-                                            <div style={
-                                                { borderColor: '#ffff00', borderWidth: 2, borderStyle: 'dashed', borderRadius: 5, height: 300, cursor: 'pointer' }
-                                            }>
-                                                {this.props.vendorStore.vendorLogo.map((file) => <img key="imgPreview" style={imgStyle} src={file.preview} />)}
+                                            className="dropImage">
+                                            <div className="pointer">
+                                                Try dropping some files here, or click to select files to upload.
+                                            </div>
+                                            <div>
+                                                {
+                                                    this.props.vendorStore.vendorInfo.vendorLogo.map(
+                                                        (file) => 
+                                                        <img key="imgPreview" style={imgStyle} src={file.preview} />
+                                                    )
+                                                }
                                             </div>
                                         </Dropzone>
                                     </div>
@@ -124,5 +131,7 @@ const imgStyle = {
     width: '100%',
     cursor: 'pointer'
 };
+
+
 
 export default SignUpForm;

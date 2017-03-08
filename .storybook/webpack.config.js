@@ -9,6 +9,10 @@ const config = {
         include: path.resolve(__dirname, '../'),
       },
       {
+        test: /\.scss$/,
+        loaders: ['style-loader', 'css-loader', 'sass-loader']
+      },
+      {
         test: /\.json?$/,
         loaders: ['json'],
         include: path.resolve(__dirname, '../'),

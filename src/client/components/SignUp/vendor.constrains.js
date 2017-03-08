@@ -13,9 +13,13 @@ const constraints = {
         presence: true, 
         email: true
     },
-    'country.shortName':{
-        presence: {
-            message:'Please select a country'
+    country:{
+        verifyCountry:'n/s'
+    },
+    vendorLogo:{
+        length: {
+            is: 1,
+            wrongLength:'missing'
         }
     }
 };
