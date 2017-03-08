@@ -16,7 +16,7 @@ const validatePhone = function (value, options, key, attributes) {
     return null;
 };
 
-const validateCountry = function (value, options, key, attributes) {
+const validateCountry = function (value, options, key, attributes) {    
     if ((value.shortName === 'n/s') || (!value.shortName))
         return '- Please select';
 
@@ -50,7 +50,7 @@ class VendorStore {
         this.vendorInfo = {
             ...this.vendorInfo,
             ...vendorInfo
-        };        
+        };
     }
 
     @action setVendorLogo(files){ 

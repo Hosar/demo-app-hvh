@@ -43,7 +43,7 @@ storiesOf('Vendor sign up', module)
         specs(() => describe('Validation errors', () => {
             it('Should show a list of errors', () => {
                 const wrapper = mount(cmp);
-                const errMsgs = wrapper.find('h2');
+                const errMsgs = wrapper.find('li');
                 console.log('errMsgs:');
                 console.log(errMsgs);
                 expect(errMsgs).to.have.length.of(3);
@@ -80,6 +80,8 @@ storiesOf('Vendor sign up', module)
 
         specs(() => describe('Not show errors when submit', () => {
             it('should not show any errors', () => {
+                const wrapper = mount(cmp);
+
                 vendorStore.setVendorInfo({
                     email: 'some@gmail.com',
                     publicName: 'someName',
@@ -89,7 +91,6 @@ storiesOf('Vendor sign up', module)
                     }
                 });
                 vendorStore.setVendorLogo(['fake value']);
-                const wrapper = mount(cmp);
                 const button = wrapper.find('.btn .btn-block .btn-info');
                 const overlay = wrapper.find('.overlay');
                 button.simulate('click');
@@ -100,14 +101,6 @@ storiesOf('Vendor sign up', module)
     })
     .add('Show missing vendor logo', () => {
         const _vendorStore = new VendorStore();
-        _vendorStore.setVendorInfo({
-            email: 'some@gmail.com',
-            publicName: 'someName',
-            country: {
-                shortName: 'MX',
-                longName: 'Mexico'
-            }
-        });
         const cmp = (
             <Provider vendorStore={_vendorStore}>
                 <SignUpForm />
@@ -116,7 +109,15 @@ storiesOf('Vendor sign up', module)
 
         specs(() => describe('Show missing vendor logo', () => {
             it('should show missing vendor logo error', () => {
-                const wrapper = mount(cmp);
+                const wrapper = mount(cmp);                
+                _vendorStore.setVendorInfo({
+                    email: 'some@gmail.com',
+                    publicName: 'someName',
+                    country: {
+                        shortName: 'MX',
+                        longName: 'Mexico'
+                    }
+                });
                 const button = wrapper.find('.btn .btn-block .btn-info');
                 const overlay = wrapper.find('.overlay');
                 button.simulate('click');
