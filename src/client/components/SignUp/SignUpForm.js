@@ -6,6 +6,7 @@ import VendorLocation from './VendorLocation';
 import { getCurrentPosition } from '../../common/utils';
 import ValidationErrors from './ValidationErrors';
 import VendorInfo from './VendorInfo';
+import DropImage from './DropImage';
 import 'react-select/dist/react-select.css';
 import './SignUpForm.scss';
 
@@ -36,7 +37,10 @@ class SignUpForm extends Component {
         this.closeOverlay = this.closeOverlay.bind(this);
     }    
 
-    onDrop(files: any) {        
+    onDrop(files: any) {  
+        console.log('Files ....');
+        console.log(files);
+
         this.props.vendorStore.setVendorLogo(files);
 
     }
@@ -68,9 +72,11 @@ class SignUpForm extends Component {
     }
 
 
-    render() {                
-        const errors = this.props.vendorStore.validationErrors.peek();        
-        const errStyle = this.props.vendorStore.hasErrorsStyle;        
+    render() {         
+        const store = this.props.vendorStore;       
+        const errors = store.validationErrors.peek();        
+        const errStyle = store.hasErrorsStyle;  
+        
         return (
             <div className="container">
                 <div className="bs-docs-section">
@@ -86,30 +92,8 @@ class SignUpForm extends Component {
                         }
                     </div>    
                     <div className="row">
-                        <div className="col-lg-offset-2 col-lg-4 col-md-4">
-                            <div className="bs-component">
-                                <div className="form-group">
-                                    <label className="control-label">Your logo:</label>
-                                    <div>
-                                        <Dropzone onDrop={this.onDrop} name={this.state.inputName}
-                                            accept="image/png,image/jpeg,image/gif" maxSize={5000000}
-                                            className="dropImage">
-                                            <div className="pointer">
-                                                Try dropping some files here, or click to select files to upload.
-                                            </div>
-                                            <div>
-                                                {
-                                                    this.props.vendorStore.vendorInfo.vendorLogo.map(
-                                                        (file) => 
-                                                        <img key="imgPreview" style={imgStyle} src={file.preview} />
-                                                    )
-                                                }
-                                            </div>
-                                        </Dropzone>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <DropImage onDrop={this.onDrop} vendorLogo={store.vendorLogo} />
+                        
                         <div className="col-lg-4 col-md-4">
                             <div className="form-group">
                                 <label className="control-label">Send Info:</label>
@@ -125,13 +109,5 @@ class SignUpForm extends Component {
         );
     }
 }
-
-const imgStyle = {
-    height: '100%',
-    width: '100%',
-    cursor: 'pointer'
-};
-
-
 
 export default SignUpForm;

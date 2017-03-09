@@ -76,6 +76,11 @@ class VendorStore {
         return _hasErrors;
     }
 
+    @computed
+    get vendorLogo(){
+        return this.vendorInfo.vendorLogo;
+    }
+
     validateVendorInfo(){
         validate.validators.verifyPhone = validatePhone;
         validate.validators.verifyCountry = validateCountry;
