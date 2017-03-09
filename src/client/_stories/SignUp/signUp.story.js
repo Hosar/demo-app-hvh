@@ -29,8 +29,34 @@ const mockHttp = {
 const vendorStore = new VendorStore(mockHttp);
 
 storiesOf('Vendor sign up', module)
-    .add('Should show google maps to allow vendor select his position', () => {
-        return <SignUp />;
+    .add('Show sign up vendor form', () => {
+        const cmp = <SignUp />;
+        
+        specs(() => describe('Show sign up vendor form', () => {
+            it('Should show inputs for capture info', () => {
+                const wrapper = mount(cmp);
+                const inputs = wrapper.find('[type="text"]');                
+                
+                expect(inputs).to.have.length.of(4);                
+            });
+
+            it('Should select country', () => {
+                const wrapper = mount(cmp);                
+                const select = wrapper.find('[role="combobox"]');
+
+                expect(select).to.have.length.of(1);
+            });
+
+            it('Should have a submit button', () => {
+                const wrapper = mount(cmp);                
+                const button = wrapper.find('button');
+
+                expect(button).to.have.length.of(1);
+            });
+
+        }));
+        
+        return cmp;
     })
     .add('Validation errors', () => {
         const hasErrorsStyle = { width: '100%' };
@@ -44,8 +70,7 @@ storiesOf('Vendor sign up', module)
             it('Should show a list of errors', () => {
                 const wrapper = mount(cmp);
                 const errMsgs = wrapper.find('li');
-                console.log('errMsgs:');
-                console.log(errMsgs);
+                
                 expect(errMsgs).to.have.length.of(3);
             });
         }));
