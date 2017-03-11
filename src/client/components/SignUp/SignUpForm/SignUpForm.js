@@ -2,11 +2,11 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
 import { inject, observer } from 'mobx-react';
-import VendorLocation from './VendorLocation';
-import { getCurrentPosition } from '../../common/utils';
-import ValidationErrors from './ValidationErrors';
-import VendorInfo from './VendorInfo';
-import DropImage from './DropImage';
+import VendorLocation from '../VendorLocation';
+import { getCurrentPosition } from '../../../common/utils';
+import ValidationErrors from './../ValidationErrors';
+import VendorInfo from './../VendorInfo';
+import DropImage from './../DropImage';
 import 'react-select/dist/react-select.css';
 import './SignUpForm.scss';
 
@@ -37,10 +37,7 @@ class SignUpForm extends Component {
         this.closeOverlay = this.closeOverlay.bind(this);
     }    
 
-    onDrop(files: any) {  
-        console.log('Files ....');
-        console.log(files);
-
+    onDrop(files: any) { 
         this.props.vendorStore.setVendorLogo(files);
 
     }
