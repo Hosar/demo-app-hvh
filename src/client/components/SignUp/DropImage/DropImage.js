@@ -37,4 +37,9 @@ const imgStyle = {
     cursor: 'pointer'
 };
 
+DropImage.propTypes = {
+    onDrop: React.PropTypes.func.isRequired,
+    vendorLogo: React.PropTypes.array.isRequired
+};
+
 export default observer(DropImage);

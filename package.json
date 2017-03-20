@@ -4,7 +4,7 @@
   "description": "Just simple chat section",
   "main": "src/index.js",
   "scripts": {
-    "storybook": "start-storybook -p 4401 -c .storybook"
+    "storybook": "start-storybook -s ./public -p 4401 -c .storybook"
   },
   "dependencies": {
     "@kadira/storybook": "^2.35.3",

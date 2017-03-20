@@ -28,14 +28,16 @@ class VendorInfo extends Component {
     inputEmail: Object;
     inputPhone: Object;
     inputWebSite: Object;
-    objCountry = {
-        shortName:'n/s',
-        longName:'Please select...'
-    }
+    objCountry: Object;
 
-    constructor(props: Props){
+    constructor(props: Props) {
         super(props);
-        this.state = { selectedCtry: {value:this.objCountry.shortName} };
+        this.objCountry = {
+            shortName: 'n/s',
+            longName: 'Please select...'
+        };
+
+        this.state = { selectedCtry: { value: this.objCountry.shortName } };
         this.selectCountry = this.selectCountry.bind(this);
     }
     

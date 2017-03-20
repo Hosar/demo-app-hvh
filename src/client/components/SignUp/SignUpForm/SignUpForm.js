@@ -72,13 +72,13 @@ class SignUpForm extends Component {
     render() {         
         const store = this.props.vendorStore;       
         const errors = store.validationErrors.peek();        
-        const errStyle = store.hasErrorsStyle;  
+        const hasErrorsStyle = store.hasErrorsStyle;  
         
         return (
             <div className="container">
                 <div className="bs-docs-section">
                     <ValidationErrors errors={errors} 
-                                      hasErrorsStyle={errStyle}
+                                      hasErrorsStyle={hasErrorsStyle}
                                       closeOverlay={this.closeOverlay}/>
 
                     <div className="row">

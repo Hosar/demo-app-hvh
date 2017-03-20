@@ -1,0 +1,8 @@
+body{
+    background:url('/img/coffeeShopLogo2.jpg') top right no-repeat; 
+    background-attachment:fixed;    
+    background-size: 100% 100%;
+    @media screen and (min-width:640px){
+        background-size: cover;
+    }
+}

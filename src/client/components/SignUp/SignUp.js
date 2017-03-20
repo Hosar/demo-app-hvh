@@ -3,6 +3,7 @@ import { Provider } from 'mobx-react';
 import VendorStore from './vendor.store';
 import SignUpForm from './SignUpForm';
 import superagent from 'superagent';
+import './SignUp.scss';
 
 const vendorStore = new VendorStore(superagent);
 
