@@ -6,5 +6,8 @@ const Constants = function (){
     this.mapsUrl = `https://maps.googleapis.com/maps/api/js?key=${this.googleMapsKey}&libraries=geometry`;
 };
 
+const someTestVariable = {
+    version: 1.1
+}
 const constants = new Constants();
 module.exports.constants = constants;
